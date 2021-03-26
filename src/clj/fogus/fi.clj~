@@ -1,2 +1,0 @@
-(ns fogus.fi
-  (:import java.util.function.Supplier))
