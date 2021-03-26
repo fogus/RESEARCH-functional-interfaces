@@ -4,10 +4,15 @@
            java.util.function.BiFunction
            java.util.function.BinaryOperator
            java.util.function.Predicate
+           java.util.function.BiPredicate
            java.util.function.Supplier
            java.util.stream.Stream
            java.util.stream.Collectors
-           java.util.Arrays))
+           java.util.Arrays
+           java.nio.file.Files
+           java.nio.file.Path
+           java.nio.file.Paths
+           java.net.URI))
 
 (defn do-supplier [n]
   (-> (Stream/generate (reify Supplier (get [_] 42)))
@@ -30,3 +35,14 @@
       .stream
       (.filter (reify Predicate (test [_ s] (odd? (count s)))))
       (.collect (Collectors/toList))))
+
+(defn do-bipred []
+  (-> (Files/find (Path/of (.toURI (java.io.File. "."))) 1
+                  (reify BiPredicate (test [_ path attr]
+                                       (and (.isRegularFile attr)
+                                            (-> path str (.endsWith "md")))))
+                  (into-array java.nio.file.FileVisitOption []))
+      (.collect (Collectors/toList))))
+
+
+

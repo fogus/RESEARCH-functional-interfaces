@@ -24,6 +24,13 @@
   (testing "Clojure"
     (is (= ["foo" "bar" "baz"] (fi/do-pred)))))
 
+(deftest test-bipredicates
+  (testing "Java"
+    (is (= 1 (count (FI/bipred)))))
+
+  (testing "Clojure"
+    (is (= 1 (count (fi/do-bipred))))))
+
 (deftest test-suppliers
   (testing "Java"
     (is (= [42 42 42 42 42] (FI/supplier 5))))

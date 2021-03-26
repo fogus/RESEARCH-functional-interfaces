@@ -1,9 +1,14 @@
 package fogus;
 
+import java.io.IOException;
+import java.net.URI;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 import java.util.stream.Collectors;
+import java.nio.file.Files;
 
 public class FI {
     public static List<Long> supplier(long n)
@@ -32,4 +37,10 @@ public class FI {
                 .filter(s -> s.length() % 2 == 1)
                 .collect(Collectors.toList());
     }
+
+    public static List<Path> bipred() throws IOException {
+        return Files.find(Path.of("."), 1, (path, attr) -> attr.isRegularFile() && path.toString().endsWith("md"))
+                .collect(Collectors.toList());
+    }
+
 }
