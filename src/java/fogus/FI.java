@@ -25,4 +25,11 @@ public class FI {
         return Arrays.asList("foo", "bar", "baz").stream()
                 .reduce(0L, (acc, s) -> acc + s.length(), Long::sum);
     }
+
+    public static List<String> pred()
+    {
+        return Arrays.asList("foo", "frob", "bar", "baz", "quux").stream()
+                .filter(s -> s.length() % 2 == 1)
+                .collect(Collectors.toList());
+    }
 }

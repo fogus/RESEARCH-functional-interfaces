@@ -3,6 +3,7 @@
   (:import java.util.function.Function
            java.util.function.BiFunction
            java.util.function.BinaryOperator
+           java.util.function.Predicate
            java.util.function.Supplier
            java.util.stream.Stream
            java.util.stream.Collectors
@@ -23,3 +24,9 @@
   (-> (Arrays/asList (to-array ["foo" "bar" "baz"]))
       .stream
       (.reduce 0 (reify BinaryOperator (apply [_ acc s] (+ acc (count s)))))))
+
+(defn do-pred []
+  (-> (Arrays/asList (to-array ["foo" "frob" "bar" "baz" "quux"]))
+      .stream
+      (.filter (reify Predicate (test [_ s] (odd? (count s)))))
+      (.collect (Collectors/toList))))

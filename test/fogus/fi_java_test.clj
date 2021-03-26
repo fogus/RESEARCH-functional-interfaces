@@ -17,6 +17,13 @@
   (testing "Clojure"
     (is (= 9 (fi/do-bifunc)))))
 
+(deftest test-predicates
+  (testing "Java"
+    (is (= ["foo" "bar" "baz"] (FI/pred))))
+
+  (testing "Clojure"
+    (is (= ["foo" "bar" "baz"] (fi/do-pred)))))
+
 (deftest test-suppliers
   (testing "Java"
     (is (= [42 42 42 42 42] (FI/supplier 5))))
