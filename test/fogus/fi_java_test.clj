@@ -10,6 +10,13 @@
   (testing "Clojure"
     (is (= ["FOO" "BAR" "BAZ"] (fi/do-func)))))
 
+(deftest test-bifunctions
+  (testing "Java"
+    (is (= 9 (FI/bifunc))))
+
+  (testing "Clojure"
+    (is (= 9 (fi/do-bifunc)))))
+
 (deftest test-suppliers
   (testing "Java"
     (is (= [42 42 42 42 42] (FI/supplier 5))))

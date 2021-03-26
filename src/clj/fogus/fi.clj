@@ -1,6 +1,8 @@
 (ns fogus.fi
   (:require [clojure.string :as string])
   (:import java.util.function.Function
+           java.util.function.BiFunction
+           java.util.function.BinaryOperator
            java.util.function.Supplier
            java.util.stream.Stream
            java.util.stream.Collectors
@@ -16,3 +18,8 @@
       .stream
       (.map (reify Function (apply [_ s] (string/upper-case s))))
       (.collect (Collectors/toList))))
+
+(defn do-bifunc []
+  (-> (Arrays/asList (to-array ["foo" "bar" "baz"]))
+      .stream
+      (.reduce 0 (reify BinaryOperator (apply [_ acc s] (+ acc (count s)))))))
