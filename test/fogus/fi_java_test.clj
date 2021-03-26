@@ -5,7 +5,7 @@
 
 (deftest test-suppliers
   (testing "Java"
-    (is (= 42 (FI/supplier))))
+    (is (= [42 42 42 42 42] (FI/supplier 5))))
 
   (testing "Java"
-    (is (= 42 (fi/do-supplier))))1)
+    (is (= [42 42 42 42 42] (fi/do-supplier 5)))))
