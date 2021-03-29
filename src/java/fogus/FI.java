@@ -107,4 +107,8 @@ public class FI {
                 .collect(Collectors.toList());
     }
 
+    public static boolean longpred () {
+        return LongStream.of(1L, 2L, 3L)
+                .anyMatch(n -> n % 2 == 1);
+    }
 }

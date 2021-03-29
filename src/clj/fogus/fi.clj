@@ -10,6 +10,7 @@
            java.util.function.LongBinaryOperator
            java.util.stream.LongStream
            java.util.function.Predicate
+           java.util.function.LongPredicate
            java.util.function.BiPredicate
            java.util.function.Supplier
            java.util.function.Consumer
@@ -73,6 +74,12 @@
                                             (-> path str (.endsWith "md")))))
                   (into-array java.nio.file.FileVisitOption []))
       (.collect (Collectors/toList))))
+
+(defn do-longpred []
+  (-> (LongStream/of (long-array [(long 1) (long 2) (long 3)]))
+      (.anyMatch (reify LongPredicate (test [_ n] (odd? n))))))
+
+;; non-functional interfaces
 
 (defn do-supplier [n]
   (-> (Stream/generate (reify Supplier (get [_] 42)))

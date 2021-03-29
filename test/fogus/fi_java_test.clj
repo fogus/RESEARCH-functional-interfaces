@@ -52,6 +52,13 @@
   (testing "Clojure"
     (is (= ["foo" "bar" "baz"] (fi/do-pred)))))
 
+(deftest test-predicates
+  (testing "Java"
+    (is (FI/longpred)))
+
+  (testing "Clojure"
+    (is (fi/do-longpred))))
+
 (deftest test-bipredicates
   (testing "Java"
     (is (= 1 (count (FI/bipred)))))
