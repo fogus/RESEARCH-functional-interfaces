@@ -46,7 +46,7 @@
                      0
                      (reify LongBinaryOperator (applyAsLong [_ acc v] (+ acc v))))))
 
-(map #(.getCanonicalName ^Class %) (.getInterfaces (class (fn ^long [^String n] n))))
+(map #(.getCanonicalName ^Class %) (.getInterfaces (class (fn [^long n] n))))
 
 (defn do-bifunc []
   (-> (Arrays/asList (to-array ["foo" "bar" "baz"]))
