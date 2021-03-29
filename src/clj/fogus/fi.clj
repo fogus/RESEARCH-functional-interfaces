@@ -5,6 +5,7 @@
            java.util.function.ToLongBiFunction
            java.util.function.BiFunction
            java.util.function.LongFunction
+           java.util.function.LongToDoubleFunction
            java.util.function.BinaryOperator
            java.util.function.LongBinaryOperator
            java.util.stream.LongStream
@@ -37,6 +38,12 @@
 (defn do-longfunc []
   (-> (LongStream/of (long-array [(long 1) (long 2) (long 3)]))
       (.mapToObj (reify LongFunction (apply [_ n] (String/valueOf n))))
+      (.collect (Collectors/toList))))
+
+(defn do-long2doublefunc []
+  (-> (LongStream/of (long-array [(long 1) (long 2) (long 3)]))
+      (.mapToDouble (reify LongToDoubleFunction (applyAsDouble [_ n] (+ Math/PI n))))
+      .boxed
       (.collect (Collectors/toList))))
 
 (defn do-toLongBiFunc []

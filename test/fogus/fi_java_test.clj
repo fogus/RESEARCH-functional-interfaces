@@ -24,6 +24,13 @@
   (testing "Clojure"
     (is (= ["1" "2" "3"] (fi/do-longfunc)))))
 
+(deftest test-prim-to-prim-functions
+  (testing "Java"
+    (is (= [4.141592653589793 5.141592653589793 6.141592653589793] (FI/long2doublefunc))))
+
+  (testing "Clojure"
+    (is (= [4.141592653589793 5.141592653589793 6.141592653589793] (fi/do-long2doublefunc)))))
+
 (deftest test-to-prim-bifunctions
   (testing "Java"
     (is (= 15 (FI/toLongBiFunc))))

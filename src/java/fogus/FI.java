@@ -82,6 +82,13 @@ public class FI {
                 .collect(Collectors.toList());
     }
 
+    public static List<Double> long2doublefunc () {
+        return LongStream.of(1L, 2L, 3L)
+                .mapToDouble(n -> n + Math.PI)
+                .boxed()
+                .collect(Collectors.toList());
+    }
+
     public static Long bifunc()
     {
         return Arrays.asList("foo", "bar", "baz").stream()
