@@ -10,6 +10,20 @@
   (testing "Clojure"
     (is (= ["FOO" "BAR" "BAZ"] (fi/do-func)))))
 
+(deftest test-to-prim-functions
+  (testing "Java"
+    (is (= [-42 0 42] (FI/toLongFunc))))
+
+  (testing "Clojure"
+    (is (= [-42 0 42] (fi/do-toLongFunc)))))
+
+(deftest test-to-prim-bifunctions
+  (testing "Java"
+    (is (= 15 (FI/toLongBiFunc))))
+
+  (testing "Clojure"
+    (is (= 15 (fi/do-toLongBiFunc)))))
+
 (deftest test-bifunctions
   (testing "Java"
     (is (= 9 (FI/bifunc))))

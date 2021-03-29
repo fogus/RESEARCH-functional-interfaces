@@ -1,8 +1,11 @@
 (ns fogus.fi
   (:require [clojure.string :as string])
   (:import java.util.function.Function
+           java.util.function.ToLongFunction
+           java.util.function.ToLongBiFunction
            java.util.function.BiFunction
            java.util.function.BinaryOperator
+           java.util.function.LongBinaryOperator
            java.util.function.Predicate
            java.util.function.BiPredicate
            java.util.function.Supplier
@@ -14,13 +17,29 @@
            java.nio.file.Files
            java.nio.file.Path
            java.nio.file.Paths
-           java.net.URI))
+           java.net.URI
+           java.util.concurrent.ConcurrentHashMap))
 
 (defn do-func []
   (-> (Arrays/asList (to-array ["foo" "bar" "baz"]))
       .stream
       (.map (reify Function (apply [_ s] (string/upper-case s))))
       (.collect (Collectors/toList))))
+
+(defn do-toLongFunc []
+  (-> (Arrays/stream (to-array ["-42" "0" "42"]))
+      (.mapToLong (reify ToLongFunction (applyAsLong [_ s] (Long/parseLong s 10))))
+      .boxed
+      (.collect (Collectors/toList))))
+
+(defn do-toLongBiFunc []
+  (-> (ConcurrentHashMap. {"a" 1, "b" 2, "c" 3, "d" 4, "e" 5})
+      (.reduceToLong 1
+                     (reify ToLongBiFunction (applyAsLong [_ k v] v))
+                     0
+                     (reify LongBinaryOperator (applyAsLong [_ acc v] (+ acc v))))))
+
+(map #(.getCanonicalName ^Class %) (.getInterfaces (class (fn ^long [^String n] n))))
 
 (defn do-bifunc []
   (-> (Arrays/asList (to-array ["foo" "bar" "baz"]))

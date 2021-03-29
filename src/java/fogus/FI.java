@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Stream;
 import java.util.stream.Collectors;
@@ -51,6 +52,30 @@ public class FI {
         return Arrays.asList("foo", "bar", "baz").stream()
                 .map(s -> s.toUpperCase())
                 .collect(Collectors.toList());
+    }
+
+    public static List<Long> toLongFunc() {
+        String[] ary = {"-42", "0", "42"};
+        return Arrays.stream(ary)
+                .mapToLong(s -> Long.parseLong(s, 10))
+                .boxed()
+                .collect(Collectors.toList());
+    }
+
+    public static Long toLongBiFunc() {
+        ConcurrentHashMap<String, Long> m = new ConcurrentHashMap<String, Long>() {{
+            put("a", 1);
+            put("b", 2);
+            put("c", 3);
+            put("d", 4);
+            put("e", 5);
+        }};
+
+        return m.reduceToLong(1,
+                              (k, v) -> v,
+                             0,
+                              (acc, v) -> acc + v);
+
     }
 
     public static Long bifunc()
