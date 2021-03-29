@@ -37,3 +37,10 @@
 
   (testing "Clojure"
     (is (= [42 42 42 42 42] (fi/do-supplier 5)))))
+
+(deftest test-consumers
+  (testing "Java"
+    (is (= 5 (FI/consumer 5))))
+
+  (testing "Clojure"
+    (is (= 5 (fi/do-consumer 5)))))

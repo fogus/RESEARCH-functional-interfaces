@@ -1,11 +1,10 @@
 package fogus;
 
 import java.io.IOException;
-import java.net.URI;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Stream;
 import java.util.stream.Collectors;
 import java.nio.file.Files;
@@ -16,6 +15,17 @@ public class FI {
         return Stream.generate(() -> 42L)
                 .limit(n)
                 .collect(Collectors.toList());
+    }
+
+    public static Long consumer(long n)
+    {
+        AtomicLong accesses = new AtomicLong(0L);
+
+        Stream.generate(() -> 42L)
+                .limit(n)
+                .forEach(x -> { System.out.println(x); accesses.getAndIncrement(); });
+
+        return accesses.get();
     }
 
     public static List<String> func()
