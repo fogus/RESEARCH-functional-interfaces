@@ -4,8 +4,10 @@
            java.util.function.ToLongFunction
            java.util.function.ToLongBiFunction
            java.util.function.BiFunction
+           java.util.function.LongFunction
            java.util.function.BinaryOperator
            java.util.function.LongBinaryOperator
+           java.util.stream.LongStream
            java.util.function.Predicate
            java.util.function.BiPredicate
            java.util.function.Supplier
@@ -30,6 +32,11 @@
   (-> (Arrays/stream (to-array ["-42" "0" "42"]))
       (.mapToLong (reify ToLongFunction (applyAsLong [_ s] (Long/parseLong s 10))))
       .boxed
+      (.collect (Collectors/toList))))
+
+(defn do-longfunc []
+  (-> (LongStream/of (long-array [(long 1) (long 2) (long 3)]))
+      (.mapToObj (reify LongFunction (apply [_ n] (String/valueOf n))))
       (.collect (Collectors/toList))))
 
 (defn do-toLongBiFunc []

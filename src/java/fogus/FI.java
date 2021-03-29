@@ -2,12 +2,10 @@ package fogus;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
+import java.util.stream.LongStream;
 import java.util.stream.Stream;
 import java.util.stream.Collectors;
 import java.nio.file.Files;
@@ -64,11 +62,11 @@ public class FI {
 
     public static Long toLongBiFunc() {
         ConcurrentHashMap<String, Long> m = new ConcurrentHashMap<String, Long>() {{
-            put("a", 1);
-            put("b", 2);
-            put("c", 3);
-            put("d", 4);
-            put("e", 5);
+            put("a", 1L);
+            put("b", 2L);
+            put("c", 3L);
+            put("d", 4L);
+            put("e", 5L);
         }};
 
         return m.reduceToLong(1,
@@ -76,6 +74,12 @@ public class FI {
                              0,
                               (acc, v) -> acc + v);
 
+    }
+
+    public static List<String> longfunc () {
+        return LongStream.of(1L, 2L, 3L)
+                .mapToObj(n -> String.valueOf(n))
+                .collect(Collectors.toList());
     }
 
     public static Long bifunc()
