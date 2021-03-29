@@ -3,7 +3,9 @@ package fogus;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Stream;
 import java.util.stream.Collectors;
@@ -26,6 +28,22 @@ public class FI {
                 .forEach(x -> { System.out.println(x); accesses.getAndIncrement(); });
 
         return accesses.get();
+    }
+
+    public static Long biconsumer()
+    {
+        AtomicLong sum = new AtomicLong(0L);
+        Map<String, Long> m = new HashMap<String, Long>() {{
+            put("a", 1L);
+            put("b", 2L);
+            put("c", 3L);
+            put("d", 4L);
+            put("e", 5L);
+        }};
+
+        m.forEach((k,v) -> { sum.getAndAdd(v); System.out.println(k + "->" + v); });
+
+        return sum.get();
     }
 
     public static List<String> func()

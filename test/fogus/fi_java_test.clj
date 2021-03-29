@@ -44,3 +44,10 @@
 
   (testing "Clojure"
     (is (= 5 (fi/do-consumer 5)))))
+
+(deftest test-biconsumers
+  (testing "Java"
+    (is (= 15 (FI/biconsumer))))
+
+  (testing "Clojure"
+    (is (= 15 (fi/do-biconsumer)))))

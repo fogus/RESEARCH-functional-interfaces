@@ -7,6 +7,7 @@
            java.util.function.BiPredicate
            java.util.function.Supplier
            java.util.function.Consumer
+           java.util.function.BiConsumer
            java.util.stream.Stream
            java.util.stream.Collectors
            java.util.Arrays
@@ -51,3 +52,9 @@
         (.limit n)
         (.forEach (reify Consumer (accept [_ x] (println x) (swap! accesses inc)))))
     @accesses))
+
+(defn do-biconsumer []
+  (let [sum (atom 0)]
+    (-> (java.util.HashMap. {"a" 1, "b" 2, "c" 3, "d" 4, "e" 5})
+        (.forEach (reify BiConsumer (accept [_ k v] (println k "->" v) (swap! sum + v)))))
+    @sum))
