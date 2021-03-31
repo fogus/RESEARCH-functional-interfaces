@@ -1,6 +1,8 @@
 {
  :paths ["src/clj" "out/production/RESEARCH-functional-interfaces"]
- :deps  {org.clojure/clojure {:mvn/version "1.11.0-alpha1"}}
+ :deps  {org.clojure/clojure {:mvn/version "1.11.0-alpha1"}
+         org.clojure/spec.alpha {:mvn/version "0.2.194"}
+         org.clojure/test.check {:mvn/version "0.9.0"}}
 
  :aliases
  {

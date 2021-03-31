@@ -98,3 +98,5 @@
     (-> (java.util.HashMap. {"a" 1, "b" 2, "c" 3, "d" 4, "e" 5})
         (.forEach (reify BiConsumer (accept [_ k v] (println k "->" v) (swap! sum + v)))))
     @sum))
+
+
