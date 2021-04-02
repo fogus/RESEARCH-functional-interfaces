@@ -86,3 +86,11 @@
 
   (testing "Clojure"
     (is (= 15 (fi/do-biconsumer)))))
+
+;; in-context examples
+
+(deftest test-uncaught-handler
+  (testing "Java"
+    (is (FI/uncaughtHandler)))
+
+  (testing "Clojure"))

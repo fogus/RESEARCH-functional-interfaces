@@ -17,14 +17,19 @@
     (get [_] (f))))
 
 (s/fdef supplier
-  :args (s/cat :f (s/fspec :args (s/cat))))
+  :args (s/cat :f ifn?))
 
 (comment
+
+  (s/fspec :args (s/cat)
+           :ret any?
+           :fn any?)
+  
   (stest/instrument `supplier)
 
   (repl/doc supplier)
 
-  (supplier #(42))
+  (supplier #(:a))
 
   (stest/unstrument `supplier)
 )

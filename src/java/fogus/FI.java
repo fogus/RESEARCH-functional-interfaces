@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.LongStream;
 import java.util.stream.Stream;
@@ -110,5 +111,24 @@ public class FI {
     public static boolean longpred () {
         return LongStream.of(1L, 2L, 3L)
                 .anyMatch(n -> n % 2 == 1);
+    }
+
+    // in-context examples
+    public static boolean uncaughtHandler() {
+        final boolean[] isCaught = {false};
+        Thread.setDefaultUncaughtExceptionHandler((thread, throwable) -> isCaught[0] = true );
+
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("Throwing!");
+                throw new RuntimeException();
+            }
+        });
+
+        t.start();
+        System.out.println("Returning: " + isCaught[0]);
+
+        return isCaught[0];
     }
 }
