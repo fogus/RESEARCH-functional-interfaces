@@ -78,7 +78,7 @@ public class FI {
     }
 
     public static List<String> longfunc () {
-        return LongStream.of(1L, 2L, 3L)
+        return LongStream.of(1, 2, 3)
                 .mapToObj(n -> String.valueOf(n))
                 .collect(Collectors.toList());
     }
